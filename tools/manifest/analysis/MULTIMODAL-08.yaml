@@ -1,0 +1,10 @@
+    analysis:
+      mode: ARTIFACT
+      typical_seconds: 0.5
+      summary: >-
+        The verified video generation record, replayed from the artifact the media
+        pipeline produced.
+      artifact_reason: >-
+        Video generation renders and encodes clips, which takes minutes rather than
+        seconds and writes to the media directory; it is not run from a request.
+      inputs: []

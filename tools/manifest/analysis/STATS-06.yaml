@@ -1,0 +1,40 @@
+    analysis:
+      adapter: scripts.stages.stats:analyse_dependence
+      mode: LIVE
+      typical_seconds: 9.0
+      summary: >-
+        Contemporaneous co-movement between the instruments you select, measured on
+        their return series over the sessions you choose, beside the propagation feature
+        block. Association only: nothing here identifies which instrument moved first.
+      inputs:
+        - name: date_from
+          kind: date
+          label: From
+          default: '2022-01-01'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            first session correlated
+        - name: date_to
+          kind: date
+          label: To
+          default: '2024-12-31'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            last session correlated
+        - name: instruments
+          kind: symbols
+          label: Instruments
+          default: []
+          max_items: 60
+          note: >-
+            choose a handful; every pair among them is measured
+        - name: top_n
+          kind: int
+          label: Pairs to show
+          default: 15
+          minimum: 5
+          maximum: 60
+          note: >-
+            how many of the strongest associations to list

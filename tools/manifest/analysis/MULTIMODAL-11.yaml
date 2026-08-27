@@ -1,0 +1,40 @@
+    analysis:
+      adapter: scripts.stages.multimodal:analyse_alignment
+      mode: LIVE
+      typical_seconds: 42.0
+      summary: >-
+        Fits the model now, then scores it with one modality shifted forward in time.
+        Forward is the only realistic direction: media arrives later than market data,
+        never earlier.
+      inputs:
+        - name: modality
+          kind: select
+          label: Modality to delay
+          default: text
+          options:
+            - text
+            - image
+            - audio
+            - video
+            - market
+            - microstructure
+            - regime
+            - propagation
+          note: >-
+            whose feature block is shifted
+        - name: max_offset
+          kind: int
+          label: Largest delay
+          default: 10
+          minimum: 1
+          maximum: 20
+          note: >-
+            in sessions; every smaller offset in the standard set is measured too
+        - name: seed
+          kind: int
+          label: Seed
+          default: 20260818
+          minimum: 1
+          maximum: 99999999
+          note: >-
+            the fit is seeded, so the same seed reproduces the curve

@@ -1,0 +1,44 @@
+    analysis:
+      adapter: scripts.stages.multimodal:analyse_assembly
+      mode: LIVE
+      typical_seconds: 1.5
+      summary: >-
+        How completely the modality blocks joined on the rows you select. The figure
+        that matters is how many rows carry every block at once, because a result
+        computed on rows with three blocks is a different claim from one computed on
+        rows with seven.
+      inputs:
+        - name: date_from
+          kind: date
+          label: From
+          default: '2022-01-01'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            first session described
+        - name: date_to
+          kind: date
+          label: To
+          default: '2024-12-31'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            last session described
+        - name: instruments
+          kind: symbols
+          label: Instruments
+          default: []
+          max_items: 60
+          note: >-
+            leave empty for every instrument in the range
+        - name: split
+          kind: select
+          label: Split
+          default: all
+          options:
+            - all
+            - train
+            - validation
+            - holdout
+          note: >-
+            which split to describe

@@ -1,0 +1,41 @@
+    analysis:
+      adapter: scripts.stages.multimodal:analyse_missingness
+      mode: LIVE
+      typical_seconds: 55.0
+      summary: >-
+        Takes one modality offline for part of the evaluation rows — columns and
+        coverage flag together — and refits nothing. Clearing the flag matters: a
+        modality whose columns are blank but whose flag still reads present keeps voting
+        with nothing behind it.
+      inputs:
+        - name: modality
+          kind: select
+          label: Modality to take offline
+          default: text
+          options:
+            - text
+            - image
+            - audio
+            - video
+            - market
+            - microstructure
+            - regime
+            - propagation
+          note: >-
+            whose block is blanked
+        - name: fraction
+          kind: float
+          label: Rows affected
+          default: 0.5
+          minimum: 0.05
+          maximum: 1.0
+          note: >-
+            the share of evaluation rows that lose the modality
+        - name: seed
+          kind: int
+          label: Seed
+          default: 20260818
+          minimum: 1
+          maximum: 99999999
+          note: >-
+            which rows lose it is a random draw

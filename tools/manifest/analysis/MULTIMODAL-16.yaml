@@ -1,0 +1,11 @@
+    analysis:
+      mode: ARTIFACT
+      typical_seconds: 0.5
+      summary: >-
+        The verified explanation benchmark and sanity suite, replayed from the artifacts
+        the paper pipeline produced.
+      artifact_reason: >-
+        The explanation benchmark needs a fitted model and a fitted surrogate, and
+        producing both takes minutes; it runs from the paper-artifact pipeline rather
+        than from a request.
+      inputs: []

@@ -1,0 +1,83 @@
+    analysis:
+      adapter: scripts.stages.stats:analyse_errors
+      mode: LIVE
+      typical_seconds: 2.0
+      summary: >-
+        Where the scoring goes wrong on your rows and how, with data problems diagnosed
+        before model problems. A row with no evidence under it is not a model failure
+        and is not counted as one.
+      inputs:
+        - name: arm
+          kind: select
+          label: Arm
+          default: FULL
+          options:
+            - FULL
+            - NO_TEXT
+            - NO_IMAGE
+            - NO_AUDIO
+            - NO_VIDEO
+            - NO_MARKET
+            - NO_MICROSTRUCTURE
+            - NO_REGIME
+            - NO_PROPAGATION
+            - NO_AFFECTIVE
+            - NO_UNCERTAINTY
+            - TEXT_ONLY
+            - IMAGE_ONLY
+            - AUDIO_ONLY
+            - VIDEO_ONLY
+            - MARKET_ONLY
+            - MARKET_MICRO
+            - ALL_MEDIA
+            - ALL_MEDIA_MARKET
+            - FUSION_STATIC
+            - FUSION_EARLY
+            - FUSION_LATE
+            - FUSION_UNCERTAINTY
+            - FUSION_REGIME_INHERITED
+            - FUSION_REGIME_CORRECTED
+          note: >-
+            whose scores to examine
+        - name: threshold
+          kind: float
+          label: Threshold
+          default: null
+          minimum: 0.0
+          maximum: 1.0
+          note: >-
+            leave empty to use the training-selected threshold
+        - name: segment_by
+          kind: select
+          label: Segment by
+          default: error_class
+          options:
+            - error_class
+            - risk_state
+            - state
+            - symbol
+          note: >-
+            cross the failure modes against another column
+        - name: date_from
+          kind: date
+          label: From
+          default: '2019-01-01'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            first scored session
+        - name: date_to
+          kind: date
+          label: To
+          default: '2026-08-14'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            last scored session
+        - name: instruments
+          kind: symbols
+          label: Instruments
+          default: []
+          max_items: 60
+          note: >-
+            leave empty for every instrument in the range

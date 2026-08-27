@@ -1,0 +1,37 @@
+    analysis:
+      adapter: scripts.stages.stats:analyse_data_integrity
+      mode: LIVE
+      typical_seconds: 1.5
+      summary: >-
+        Profiles the rows you select, now. Block coverage, key uniqueness, split sizes
+        and episode rate are recomputed over the selected slice by the same functions
+        the regenerating adapter uses; nothing is read from a stored profile.
+      inputs:
+        - name: date_from
+          kind: date
+          label: From
+          default: '2022-01-01'
+          minimum: '2015-04-07'
+          maximum: '2026-08-14'
+          note: first session included in the profile
+        - name: date_to
+          kind: date
+          label: To
+          default: '2024-12-31'
+          minimum: '2015-04-07'
+          maximum: '2026-08-14'
+          note: last session included in the profile
+        - name: instruments
+          kind: symbols
+          label: Instruments
+          default: []
+          max_items: 60
+          note: leave empty to profile every instrument in the range
+        - name: split
+          kind: select
+          label: Split
+          default: all
+          options: [all, train, validation, holdout]
+          note: >-
+            the holdout is included in counts and is never scored; selecting it profiles
+            its structure only

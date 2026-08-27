@@ -1,0 +1,74 @@
+    analysis:
+      adapter: scripts.stages.multimodal:analyse_text_affect
+      mode: LIVE
+      typical_seconds: 2.0
+      summary: >-
+        Runs the canonical extractor over your slice and shows how one dimension varies
+        across groups. A dimension named for an emotion is a lexicon match count under
+        that name, over text this project generated.
+      inputs:
+        - name: date_from
+          kind: date
+          label: From
+          default: '2022-01-01'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            first publication date
+        - name: date_to
+          kind: date
+          label: To
+          default: '2022-12-31'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            last publication date
+        - name: instruments
+          kind: symbols
+          label: Instruments
+          default: []
+          max_items: 60
+          note: >-
+            leave empty for every instrument in the range
+        - name: dimension
+          kind: select
+          label: Dimension in focus
+          default: narrative_intensity
+          options:
+            - narrative_intensity
+            - fear
+            - urgency
+            - uncertainty
+            - optimism
+            - anger
+            - trust
+            - confusion
+            - speculation
+            - credibility
+          note: >-
+            the dimension broken out by group below
+        - name: group_by
+          kind: select
+          label: Group by
+          default: doc_kind
+          options:
+            - doc_kind
+            - symbol
+          note: >-
+            what to compare that dimension across
+        - name: sample_size
+          kind: int
+          label: Documents to score
+          default: 600
+          minimum: 50
+          maximum: 2000
+          note: >-
+            scored live; the sample is drawn with a fixed seed
+        - name: supplied_text
+          kind: document
+          label: Or score your own text
+          default: ''
+          note: >-
+            paste a paragraph or upload a plain-text document; when this is filled the
+            corpus controls above are ignored and only this text is scored. Nothing is
+            stored: the document is read into memory and the request ends

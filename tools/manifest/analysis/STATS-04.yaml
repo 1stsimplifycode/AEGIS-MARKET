@@ -1,0 +1,32 @@
+    analysis:
+      adapter: scripts.stages.stats:analyse_microstructure
+      mode: LIVE
+      typical_seconds: 1.2
+      summary: >-
+        Coverage and dispersion of the market and microstructure-proxy features on your
+        rows, beside the register of order-book quantities daily bars cannot express at
+        all. The second list is the boundary of the first.
+      inputs:
+        - name: date_from
+          kind: date
+          label: From
+          default: '2022-01-01'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            first session described
+        - name: date_to
+          kind: date
+          label: To
+          default: '2024-12-31'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            last session described
+        - name: instruments
+          kind: symbols
+          label: Instruments
+          default: []
+          max_items: 60
+          note: >-
+            leave empty for every instrument in the range

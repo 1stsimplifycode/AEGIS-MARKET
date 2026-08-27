@@ -1,0 +1,10 @@
+    analysis:
+      mode: ARTIFACT
+      typical_seconds: 0.5
+      summary: >-
+        The verified baseline comparison, replayed from the artifact the experiment
+        runner produced, with the run identifier and commit that produced it.
+      artifact_reason: >-
+        Regenerating the baseline comparison refits every arm and overwrites artifacts
+        the claim ledger cites, which no request may do.
+      inputs: []

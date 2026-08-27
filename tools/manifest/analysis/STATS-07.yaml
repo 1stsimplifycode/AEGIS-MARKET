@@ -1,0 +1,40 @@
+    analysis:
+      adapter: scripts.stages.stats:analyse_tail_risk
+      mode: LIVE
+      typical_seconds: 2.0
+      summary: >-
+        Tail statistics of the realised next-session return over your slice, computed by
+        the same function the exposure gate reads. This is the input distribution, not
+        the result of acting on it, and no position size is produced anywhere.
+      inputs:
+        - name: date_from
+          kind: date
+          label: From
+          default: '2022-01-01'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            first session in the return series
+        - name: date_to
+          kind: date
+          label: To
+          default: '2024-12-31'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            last session in the return series
+        - name: instruments
+          kind: symbols
+          label: Instruments
+          default: []
+          max_items: 60
+          note: >-
+            leave empty for every instrument in the range
+        - name: alpha
+          kind: float
+          label: Tail probability
+          default: 0.05
+          minimum: 0.01
+          maximum: 0.25
+          note: >-
+            the quantile VaR and CVaR are measured at

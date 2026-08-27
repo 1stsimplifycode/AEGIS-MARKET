@@ -1,0 +1,8 @@
+    analysis:
+      adapter: scripts.stages.stats:analyse_leakage
+      mode: LIVE
+      typical_seconds: 10.0
+      summary: >-
+        Runs the L1-L6 leakage suite now and reports what it found. No parameters: a
+        leakage check whose scope the requester can narrow is not a leakage check.
+      inputs: []

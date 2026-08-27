@@ -1,0 +1,50 @@
+    analysis:
+      adapter: scripts.stages.stats:analyse_seed_noise
+      mode: LIVE
+      typical_seconds: 50.0
+      summary: >-
+        Derives the seed noise floor over the arms you select and tests every pair
+        against it. A difference smaller than the floor is not a small effect: it is not
+        distinguishable from rerunning the same arm with a different seed.
+      inputs:
+        - name: arms
+          kind: multiselect
+          label: Arms
+          default: []
+          max_items: 40
+          options:
+            - FULL
+            - NO_TEXT
+            - NO_IMAGE
+            - NO_AUDIO
+            - NO_VIDEO
+            - NO_MARKET
+            - NO_MICROSTRUCTURE
+            - NO_REGIME
+            - NO_PROPAGATION
+            - NO_AFFECTIVE
+            - NO_UNCERTAINTY
+            - TEXT_ONLY
+            - IMAGE_ONLY
+            - AUDIO_ONLY
+            - VIDEO_ONLY
+            - MARKET_ONLY
+            - MARKET_MICRO
+            - ALL_MEDIA
+            - ALL_MEDIA_MARKET
+            - FUSION_STATIC
+            - FUSION_EARLY
+            - FUSION_LATE
+            - FUSION_UNCERTAINTY
+            - FUSION_REGIME_INHERITED
+            - FUSION_REGIME_CORRECTED
+          note: >-
+            leave empty to use every arm with completed seed fits
+        - name: alpha
+          kind: float
+          label: Alpha
+          default: 0.05
+          minimum: 0.01
+          maximum: 0.2
+          note: >-
+            the level the Benjamini-Hochberg correction controls at

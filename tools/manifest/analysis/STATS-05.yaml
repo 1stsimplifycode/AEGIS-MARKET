@@ -1,0 +1,43 @@
+    analysis:
+      adapter: scripts.stages.stats:analyse_regimes
+      mode: LIVE
+      typical_seconds: 1.2
+      summary: >-
+        How the rows you selected distribute across regimes, and the episode rate inside
+        each. A regime holding thirty rows supports very little on its own, so the row
+        count is reported beside every share.
+      inputs:
+        - name: date_from
+          kind: date
+          label: From
+          default: '2022-01-01'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            first session included
+        - name: date_to
+          kind: date
+          label: To
+          default: '2024-12-31'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            last session included
+        - name: instruments
+          kind: symbols
+          label: Instruments
+          default: []
+          max_items: 60
+          note: >-
+            leave empty for every instrument in the range
+        - name: split
+          kind: select
+          label: Split
+          default: all
+          options:
+            - all
+            - train
+            - validation
+            - holdout
+          note: >-
+            regime occupancy can differ between splits, which is worth checking

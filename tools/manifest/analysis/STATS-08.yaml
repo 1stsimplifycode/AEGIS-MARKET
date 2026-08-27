@@ -1,0 +1,32 @@
+    analysis:
+      adapter: scripts.stages.stats:analyse_episodes
+      mode: LIVE
+      typical_seconds: 1.0
+      summary: >-
+        Summarises the injected episodes overlapping your window: how many, on which
+        instruments, at what intensity. These are a construction with known parameters,
+        not observed market manipulation.
+      inputs:
+        - name: date_from
+          kind: date
+          label: From
+          default: '2022-01-01'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            first labelled session
+        - name: date_to
+          kind: date
+          label: To
+          default: '2024-12-31'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            last labelled session
+        - name: instruments
+          kind: symbols
+          label: Instruments
+          default: []
+          max_items: 60
+          note: >-
+            leave empty for every instrument in the range

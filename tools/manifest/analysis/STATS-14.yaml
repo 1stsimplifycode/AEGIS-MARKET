@@ -1,0 +1,91 @@
+    analysis:
+      adapter: scripts.stages.stats:analyse_ablation
+      mode: LIVE
+      typical_seconds: 3.0
+      summary: >-
+        Recomputes each arm's detection metrics on the rows you select. The arms were
+        fitted once by the experiment runner and are not refitted here, because
+        refitting on request would let an arm ranking be chosen after seeing the
+        evaluation data.
+      inputs:
+        - name: arms
+          kind: multiselect
+          label: Arms
+          default: [FULL, NO_TEXT, NO_MARKET, TEXT_ONLY]
+          max_items: 40
+          options:
+            - FULL
+            - NO_TEXT
+            - NO_IMAGE
+            - NO_AUDIO
+            - NO_VIDEO
+            - NO_MARKET
+            - NO_MICROSTRUCTURE
+            - NO_REGIME
+            - NO_PROPAGATION
+            - NO_AFFECTIVE
+            - NO_UNCERTAINTY
+            - TEXT_ONLY
+            - IMAGE_ONLY
+            - AUDIO_ONLY
+            - VIDEO_ONLY
+            - MARKET_ONLY
+            - MARKET_MICRO
+            - ALL_MEDIA
+            - ALL_MEDIA_MARKET
+            - FUSION_STATIC
+            - FUSION_EARLY
+            - FUSION_LATE
+            - FUSION_UNCERTAINTY
+            - FUSION_REGIME_INHERITED
+            - FUSION_REGIME_CORRECTED
+          note: >-
+            two or more arms to compare on the same rows
+        - name: reference
+          kind: select
+          label: Reference arm
+          default: FULL
+          options:
+            - FULL
+            - NO_TEXT
+            - NO_IMAGE
+            - NO_AUDIO
+            - NO_VIDEO
+            - NO_MARKET
+            - NO_MICROSTRUCTURE
+            - NO_REGIME
+            - NO_PROPAGATION
+            - NO_AFFECTIVE
+            - NO_UNCERTAINTY
+            - TEXT_ONLY
+            - IMAGE_ONLY
+            - AUDIO_ONLY
+            - VIDEO_ONLY
+            - MARKET_ONLY
+            - MARKET_MICRO
+            - ALL_MEDIA
+            - ALL_MEDIA_MARKET
+            - FUSION_STATIC
+            - FUSION_EARLY
+            - FUSION_LATE
+            - FUSION_UNCERTAINTY
+            - FUSION_REGIME_INHERITED
+            - FUSION_REGIME_CORRECTED
+          note: >-
+            every difference is reported against this arm
+        - name: date_from
+          kind: date
+          label: From
+          default: '2019-01-01'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            first scored session
+        - name: date_to
+          kind: date
+          label: To
+          default: '2026-08-14'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            last scored session

@@ -1,0 +1,49 @@
+    analysis:
+      adapter: scripts.stages.multimodal:analyse_degeneracy
+      mode: LIVE
+      typical_seconds: 1.0
+      summary: >-
+        Runs the degeneracy proof at parameters you choose. The claim is algebraic, so
+        it should survive any parameterisation: turn the regime term up and the
+        difference stays at machine precision.
+      inputs:
+        - name: n_rows
+          kind: int
+          label: Rows
+          default: 500
+          minimum: 50
+          maximum: 5000
+          note: >-
+            how many rows to construct
+        - name: n_modalities
+          kind: int
+          label: Modalities
+          default: 8
+          minimum: 2
+          maximum: 32
+          note: >-
+            how many modality logits enter the softmax
+        - name: n_regimes
+          kind: int
+          label: Regimes
+          default: 4
+          minimum: 2
+          maximum: 16
+          note: >-
+            how many regimes to draw from
+        - name: regime_term_sd
+          kind: float
+          label: Regime term spread
+          default: 25.0
+          minimum: 0.1
+          maximum: 100.0
+          note: >-
+            how large to make the term that is supposed to matter
+        - name: seed
+          kind: int
+          label: Seed
+          default: 20260818
+          minimum: 1
+          maximum: 99999999
+          note: >-
+            the construction is seeded

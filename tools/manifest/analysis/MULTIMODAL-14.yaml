@@ -1,0 +1,42 @@
+    analysis:
+      adapter: scripts.stages.multimodal:analyse_decomposition
+      mode: LIVE
+      typical_seconds: 3.0
+      summary: >-
+        Unique, shared and synergistic contribution per modality, recomputed from the
+        stored per-arm scores. A modality needs both a stand-alone and a leave-one-out
+        arm to be decomposed; one without both is reported as unavailable rather than
+        guessed.
+      inputs:
+        - name: modalities
+          kind: multiselect
+          label: Modalities
+          default: [text, image, audio, video, market, microstructure]
+          max_items: 8
+          options:
+            - text
+            - image
+            - audio
+            - video
+            - market
+            - microstructure
+            - regime
+            - propagation
+          note: >-
+            which modalities to decompose
+        - name: date_from
+          kind: date
+          label: From
+          default: '2019-01-01'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            first scored session
+        - name: date_to
+          kind: date
+          label: To
+          default: '2026-08-14'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            last scored session

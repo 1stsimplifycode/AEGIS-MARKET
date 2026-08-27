@@ -1,0 +1,32 @@
+    analysis:
+      adapter: scripts.stages.multimodal:analyse_sonification
+      mode: LIVE
+      typical_seconds: 4.0
+      summary: >-
+        Sonifies the market window and extracts acoustic features from the waveform,
+        both during this request. The waveform contains no speech: features named for
+        prosody describe an oscillator driven by prices.
+      inputs:
+        - name: symbol
+          kind: symbols
+          label: Instrument
+          default: [RELIANCE]
+          max_items: 1
+          note: >-
+            one instrument; its prices drive the oscillator
+        - name: as_of
+          kind: date
+          label: As of
+          default: '2024-06-28'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            the window ends on the last session on or before this date
+        - name: lookback
+          kind: int
+          label: Sessions to sonify
+          default: 60
+          minimum: 20
+          maximum: 250
+          note: >-
+            each session becomes one note

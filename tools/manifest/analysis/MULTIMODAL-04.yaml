@@ -1,0 +1,32 @@
+    analysis:
+      adapter: scripts.stages.multimodal:analyse_image_render
+      mode: LIVE
+      typical_seconds: 2.5
+      summary: >-
+        Rasterises the price window with the canonical chart generator and reads the
+        result back through the canonical image pipeline. The whole modality in one
+        request — and a demonstration that the image carries nothing the prices did not.
+      inputs:
+        - name: symbol
+          kind: symbols
+          label: Instrument
+          default: [RELIANCE]
+          max_items: 1
+          note: >-
+            one instrument; the chart is rendered from its price history
+        - name: as_of
+          kind: date
+          label: As of
+          default: '2024-06-28'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            the window ends on the last session on or before this date
+        - name: lookback
+          kind: int
+          label: Sessions in the window
+          default: 60
+          minimum: 20
+          maximum: 250
+          note: >-
+            how much history the chart draws

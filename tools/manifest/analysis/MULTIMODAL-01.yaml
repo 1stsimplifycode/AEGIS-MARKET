@@ -1,0 +1,54 @@
+    analysis:
+      adapter: scripts.stages.multimodal:analyse_text_corpus
+      mode: LIVE
+      typical_seconds: 4.0
+      summary: >-
+        Runs the canonical affect extractor over a deterministic sample of the documents
+        aligned to your selection. The lexicon match rate is returned beside the scores,
+        because a dimension scored from one matched token in eight is not the same object
+        as one scored from twenty.
+      inputs:
+        - name: date_from
+          kind: date
+          label: From
+          default: '2022-01-01'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: first publication date included
+        - name: date_to
+          kind: date
+          label: To
+          default: '2022-12-31'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: last publication date included
+        - name: instruments
+          kind: symbols
+          label: Instruments
+          default: []
+          max_items: 60
+          note: leave empty for every instrument carrying text in the range
+        - name: doc_kind
+          kind: select
+          label: Document kind
+          default: all
+          options:
+            - all
+            - background_neutral
+            - background_alarm
+            - episode_escalation
+            - episode_peak
+            - episode_resolution
+            - episode_offnarrative
+          note: >-
+            episode documents are narration generated with the injected episodes (L-04);
+            background documents are filler. Neither is collected market commentary.
+        - name: sample_size
+          kind: int
+          label: Documents to score
+          default: 400
+          minimum: 50
+          maximum: 2000
+          note: >-
+            scored live at roughly a hundred documents a second; the sample is drawn with
+            a fixed seed so the same selection returns the same documents

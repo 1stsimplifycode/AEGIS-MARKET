@@ -1,0 +1,54 @@
+    analysis:
+      adapter: scripts.stages.stats:analyse_robustness
+      mode: LIVE
+      typical_seconds: 65.0
+      summary: >-
+        One perturbation condition, run now: the model is fitted on clean data and
+        scored on degraded inputs. Fitting once is the point — refitting on corrupted
+        data asks whether the learner adapts, which is not what a degraded feed does to
+        a deployed model.
+      inputs:
+        - name: corruption
+          kind: select
+          label: Failure mode
+          default: gaussian
+          options:
+            - gaussian
+            - dropout
+            - stale
+            - outliers
+          note: >-
+            stale is a delayed feed, which is more common in production than noise and
+            invisible to a null check
+        - name: severity
+          kind: float
+          label: Severity
+          default: 0.1
+          minimum: 0.01
+          maximum: 0.5
+          note: >-
+            the fraction of values affected, or the noise scale
+        - name: modality
+          kind: select
+          label: Applied to
+          default: all
+          options:
+            - all
+            - text
+            - image
+            - audio
+            - video
+            - market
+            - microstructure
+            - regime
+            - propagation
+          note: >-
+            degrade every feature, or only one block's
+        - name: seed
+          kind: int
+          label: Seed
+          default: 20260818
+          minimum: 1
+          maximum: 99999999
+          note: >-
+            changing it changes which values are hit

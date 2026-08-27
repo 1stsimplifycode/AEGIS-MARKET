@@ -1,0 +1,43 @@
+    analysis:
+      adapter: scripts.stages.multimodal:analyse_video_block
+      mode: LIVE
+      typical_seconds: 1.2
+      summary: >-
+        Per-feature presence and dispersion for the video block on the rows you select.
+        The clips behind these features were rendered by this project; no broadcast
+        footage is downloaded or analysed anywhere in the system.
+      inputs:
+        - name: date_from
+          kind: date
+          label: From
+          default: '2022-01-01'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            first session described
+        - name: date_to
+          kind: date
+          label: To
+          default: '2024-12-31'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            last session described
+        - name: instruments
+          kind: symbols
+          label: Instruments
+          default: []
+          max_items: 60
+          note: >-
+            leave empty for every instrument in the range
+        - name: split
+          kind: select
+          label: Split
+          default: all
+          options:
+            - all
+            - train
+            - validation
+            - holdout
+          note: >-
+            which split to describe

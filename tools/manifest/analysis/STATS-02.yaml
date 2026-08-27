@@ -1,0 +1,25 @@
+    analysis:
+      adapter: scripts.stages.stats:analyse_universe
+      mode: LIVE
+      typical_seconds: 0.6
+      summary: >-
+        Reconstructs membership and churn across the rebalances inside your window.
+        Survivorship is a property of a window rather than of a dataset, so the answer
+        changes with the window and is computed for the one you choose.
+      inputs:
+        - name: date_from
+          kind: date
+          label: From
+          default: '2018-01-01'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            first rebalance included
+        - name: date_to
+          kind: date
+          label: To
+          default: '2024-12-31'
+          minimum: '2015-01-01'
+          maximum: '2026-08-14'
+          note: >-
+            last rebalance included

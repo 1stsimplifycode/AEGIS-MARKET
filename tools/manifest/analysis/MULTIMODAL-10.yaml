@@ -1,0 +1,28 @@
+    analysis:
+      adapter: scripts.stages.multimodal:analyse_media_licence
+      mode: LIVE
+      typical_seconds: 0.5
+      summary: >-
+        Classifies a media reference against the licence rules, offline. The URL is
+        never fetched: the question is whether the material may be redistributed, and
+        its host cannot answer that.
+      inputs:
+        - name: source_url
+          kind: text
+          label: Media reference
+          default: 'https://www.reuters.com/markets/'
+          required: true
+          note: >-
+            the full address of the reference you want classified
+        - name: publisher
+          kind: text
+          label: Publisher
+          default: ''
+          note: >-
+            optional; recorded with the verdict
+        - name: licence_name
+          kind: text
+          label: Declared licence
+          default: ''
+          note: >-
+            optional; a declaration alone never upgrades a status without evidence
