@@ -1,3 +1,7 @@
+<div align="center"><img src="https://raw.githubusercontent.com/1stsimplifycode/1stsimplifycode/main/assets/universal-project-3d.svg" width="100%" alt="Animated 3D engineering architecture illustration" /></div>
+
+[← Engineering Portfolio](https://github.com/1stsimplifycode) · [Explore All Public Domains](https://github.com/1stsimplifycode/1stsimplifycode/blob/main/docs/PROJECT_DIRECTORY.md)
+
 # AEGIS-Market
 
 **Adaptive Evidence-Gated Integrity System for Rare-Event Market Risk**
